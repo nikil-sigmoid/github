@@ -28,7 +28,16 @@ jobs:
 
     - name: Run python script
       run: |
-          echo ${{ secrets.GITHUB_TOKEN }}
+          echo "github_token: ${{ secrets.GITHUB_TOKEN }}"
+          curl --request GET \
+          --url https://api.github.com/repos/${{ github.repository }}/pulls/1/files \
+          --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
+          --header 'content-type: application/json' \
+          --data '{
+            "title": "Automated issue for commit: ${{ github.sha }}",
+            "body": "This issue was automatically created by the GitHub Action workflow **${{ github.workflow }}**. \n\n The commit hash was: _${{ github.sha }}_."
+            }' \
+          --fail
 #         echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
 #         echo "github ref: $GITHUB_REF"
 #         echo "github ref name: $GITHUB_REF_NAME"
