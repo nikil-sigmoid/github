@@ -1,0 +1,28 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: add files
+        run: |
+          pwd
+          echo "listing files:"
+          ls -al
+          echo "new text file" > sample.txt
+          echo "listing files after adding sample.txt"
+          ls -al
+          
+      - uses: EndBug/add-and-commit@v8
+        with:
+          message: 'Add the very useful text file'
+#           add: '*.txt --force'
+#           cwd: './pathToRepo/'

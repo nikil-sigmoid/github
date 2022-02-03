@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/authenticate_demo" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/files_changed" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/ga_demo_container" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/github_actions_test_deploy" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/test_github" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/test_github_actions" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/test_repo_pylinter_v2" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/vault-guides" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/vault-guides/ecosystem/vault-github-action" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/vault-guides/ecosystem/vault-github-action/actions-runner/actions-runner/_work/vault-action-exampleapp/vault-action-exampleapp" vcs="Git" />
+  </component>
+</project>

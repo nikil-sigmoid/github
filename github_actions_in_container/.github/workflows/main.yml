@@ -1,0 +1,108 @@
+# Running GitHub actions in a container
+
+name: CI
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# env:
+#   REGISTRY: ghcr.io
+#   IMAGE_NAME: ${{ github.repository }}
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    container: 
+      image: ghcr.io/nikil-sigmoid/my_ubuntu_image:v2
+#      options: -v /my_dir:/github/home/nice
+#       volumes:
+#         - /my_dir:/__w/github_actions_in_container/github_actions_in_container
+
+
+#     container: ubuntu:latest
+
+#       image: ghcr.io/nikil-sigmoid/my_ubuntu_image:v1
+#       credentials:
+#         username:  ${{ github.actor }}
+#         password: ${{ secrets.GITHUB_TOKEN }}
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      
+      - name: Printing all directories
+        run: |
+          tree -a
+          pwd
+          echo $GITHUB_WORKSPACE
+          ls -aR
+          mkdir dir_1
+          cd ..
+          cd ..
+          tree -a
+          ls -aR
+      
+      
+      - name: Print hello
+        run: |
+          pwd
+          ls -al
+          cd ..
+          pwd
+          ls -al
+          echo "Hello there"
+      
+      - uses: actions/checkout@v2
+
+      # Runs a single command using the runners shell
+      - name: After checkout
+        run: |
+          echo Hello, world!
+          echo "pwd:"
+          pwd
+          echo "ls: "
+          ls -al
+        
+      - name: run hello_world
+        run: |
+          cd $GITHUB_WORKSPACE
+          pwd
+          ls
+          python3 --version
+          python3 hello_world.py
+
+      # Runs a set of commands using the runners shell
+      - name: Run a multi-line script
+        run: |
+          echo ${{ env.IMAGE_NAME }}
+          # docker run ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          # docker run ghcr.io/nikil-sigmoid/my_ubuntu_image:v1
+          echo "pwd:"
+          pwd
+          echo "ls: "
+          ls -al
+          echo Add other actions to build,
+          echo test, and deploy your project.
+          
+
+  test:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    container: 
+      image: ghcr.io/nikil-sigmoid/my_ubuntu_image:v2
+      
+    steps:
+      - name: container directories
+        run: |
+          tree -a
