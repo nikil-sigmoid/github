@@ -1,0 +1,49 @@
+on:
+  pull_request:
+    branches: [main]
+    types: [closed]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha }}
+
+
+      - name: Get changed files
+        id: changed-files
+        uses: nikil-sigmoid/files_changed@v1
+
+
+      - name: List all added files
+        run: |
+          echo "json file: ${{ steps.changed.outputs.json }}"
+          # for file in ${{ steps.changed.outputs.json }}; do
+          #   echo "$file was added"
+          # done
+
+
+      - name: 
+        run: |
+          echo "inputs:"
+          echo "${{ inputs }}"
+          echo "github:"
+          echo "${{ github }}"
+          echo "base.sha:"
+          echo "${{ inputs.base_sha }}"
+          echo "env ends"
+
+
+          echo "printing github ref:"
+          echo $GITHUB_REF
+          echo "printing github ref name:"
+          echo $GITHUB_REF_NAME
+
+
+          echo ${{ github.event.pull_request.head.sha }}
+          git log 
+          pwd
+          ls -lrt

@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "dir1/**"
+
+defaults:
+  run:
+    working-directory: dir1
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # windows-latest | macos-latest
+    name: Test changed-files
+    steps:
+      - name: Checkout into dir1
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
+          path: dir1
+
+      - name: Run changed-files with defaults on the dir1
+        id: changed-files-for-dir1
+        uses: tj-actions/changed-files@v13.1
+        with:
+          path: dir1
+
+      - name: List all changed files in dir1
+        run: |
+          for file in ${{ steps.changed-files-for-dir1.outputs.all_changed_files }}; do
+            echo "$file was added"
+          done
